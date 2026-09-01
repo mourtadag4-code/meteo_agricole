@@ -1,0 +1,13 @@
+# Secrets - ne jamais commiter
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Données volumineuses (optionnel selon la taille de ton repo GitHub)
+*.csv
+*.joblib
+*.parquet
