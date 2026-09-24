@@ -4,11 +4,15 @@ Plateforme prédictive combinant données météo temps réel et modèles de mac
 
 Projet initié lors du hackathon **Databeez** (2025), puis retravaillé pour fiabiliser le pipeline de production.
 
+![Démo de la plateforme](assets/demo.gif)
+
 ## 🎯 Fonctionnalités
 
 - Récupération de données météo en temps réel via API
 - Prédiction de la pluie à J+1 (classification binaire)
 - Prédiction du risque de sécheresse sur les 7 prochains jours (classification binaire)
+- Estimation du risque de maladie fongique (seuils agronomiques température × humidité)
+- Calcul du besoin en irrigation par culture, méthode FAO-56 (Hargreaves-Samani + coefficient cultural Kc)
 - Interface Streamlit accessible aux agriculteurs
 
 **Démo en ligne :** [meteo-agricole.onrender.com](https://meteo-agricole.onrender.com/)
@@ -39,6 +43,14 @@ En nettoyant le notebook exploratoire pour en faire des scripts de production, d
 ## 🛠️ Stack technique
 
 `Python` · `XGBoost` · `scikit-learn` · `pandas` · `NumPy` · `Streamlit` · API météo
+
+## 🚀 Lancer l'app en local
+
+```bash
+pip install -r requirements.txt
+# Créer un fichier .env avec : OPENWEATHER_API_KEY=votre_clé
+streamlit run app.py
+```
 
 ## 🚀 Reproduire l'entraînement
 
