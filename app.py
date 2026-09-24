@@ -67,16 +67,17 @@ modele_secheresse = charger_modele_secheresse()
 st.title("🌾 Plateforme Intelligente Météo & Agricole")
 st.caption("Zone des Niayes, Sénégal — aide à la décision pour l'irrigation et la protection des cultures")
 
+MODE_LIVE = "🔴 Aujourd'hui (en direct)"
+MODE_HISTORIQUE = f"📅 Explorer une date passée (démo, jusqu'au {df_meteo['date'].max().strftime('%d %B %Y')})"
 # --- Barre latérale : sélection commune à plusieurs onglets ---
 with st.sidebar:
     st.header("⚙️ Paramètres")
     culture = st.selectbox("Culture", options=list(TABLE_KC.keys()), index=0)
     stade = st.selectbox("Stade de croissance", options=["initial", "mi_saison", "fin_saison"], index=1)
     st.divider()
+    mode = st.radio("Source des données", [MODE_LIVE, MODE_HISTORIQUE], index=0)
 
-    mode = st.radio("Source des données", ["📅 Historique (démo)", "🔴 Aujourd'hui (en direct)"])
-
-    if mode == "📅 Historique (démo)":
+    if mode == MODE_HISTORIQUE:
         date_selectionnee = st.date_input(
             "Date à analyser",
             value=df_meteo["date"].max(),
@@ -89,7 +90,7 @@ with st.sidebar:
             st.cache_data.clear()
 
 # --- Récupération des données selon le mode choisi ---
-if mode == "📅 Historique (démo)":
+if mode == MODE_HISTORIQUE:
     df_historique_recent = df_meteo[df_meteo["date"] <= pd.to_datetime(date_selectionnee)].tail(30)
     ligne_jour = df_meteo[df_meteo["date"] == pd.to_datetime(date_selectionnee)]
     if ligne_jour.empty:
@@ -128,7 +129,7 @@ with onglet_apercu:
     col4.metric("Vent", f"{meteo_jour['wind_speed']:.1f} m/s")
 
     st.subheader(f"Évolution météo récente (jusqu'au {date_affichee})")
-    if mode == "📅 Historique (démo)":
+    if mode == MODE_HISTORIQUE:
         df_recent = df_meteo[df_meteo["date"] <= pd.to_datetime(date_selectionnee)].tail(90)
     else:
         df_recent = df_historique_recent  # seulement les 10 jours récupérés en direct
