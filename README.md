@@ -4,7 +4,7 @@ Plateforme prédictive combinant données météo temps réel et modèles de mac
 
 Projet initié lors du hackathon **Databeez** (2025), puis retravaillé pour fiabiliser le pipeline de production.
 
-![Démo de la plateforme](assets/demo.gif)
+![Démo de la plateforme](assets/demo_meteo_niayes.gif)
 
 ## 🎯 Fonctionnalités
 
@@ -19,10 +19,10 @@ Projet initié lors du hackathon **Databeez** (2025), puis retravaillé pour fia
 
 ## 🤖 Modèles
 
-| Modèle | Type | AUC-ROC | F1-score | Seuil de décision |
-|---|---|---|---|---|
-| Prédiction de pluie (J+1) | XGBoost (classification binaire) | 0.852 | 0.667 | 0.23 |
-| Risque de sécheresse (7 jours) | XGBoost (classification binaire) | 0.941 | 0.930 | 0.62 |
+| Modèle                         | Type                             | AUC-ROC | F1-score | Seuil de décision |
+| ------------------------------ | --------------------------------- | ------- | -------- | ------------------ |
+| Prédiction de pluie (J+1)      | XGBoost (classification binaire) | 0.852   | 0.667    | 0.23                |
+| Risque de sécheresse (7 jours) | XGBoost (classification binaire) | 0.941   | 0.930    | 0.62                |
 
 ### Feature engineering
 
@@ -62,17 +62,16 @@ python entrainer_secheresse.py
 
 ## 📁 Structure
 
-```
 meteo_agricole/
-├── app.py                          # Application Streamlit
-├── meteo_niayes.py                 # Récupération des données météo (API)
-├── entrainer_pluie.py              # Entraînement du modèle de pluie
-├── entrainer_secheresse.py         # Entraînement du modèle de sécheresse
+├── app.py # Application Streamlit
+├── meteo_niayes.py # Récupération des données météo (API)
+├── entrainer_pluie.py # Entraînement du modèle de pluie
+├── entrainer_secheresse.py # Entraînement du modèle de sécheresse
 ├── dataset_entrainement_niayes.csv # Données d'entraînement
-├── modele_pluie.joblib             # Modèle pluie sérialisé (modèle + scaler + features)
-├── modele_secheresse.joblib        # Modèle sécheresse sérialisé
+├── modele_pluie.joblib # Modèle pluie sérialisé (modèle + scaler + features)
+├── modele_secheresse.joblib # Modèle sécheresse sérialisé
 └── requirements.txt
-```
+
 
 ## 👤 Auteur
 
